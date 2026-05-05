@@ -396,8 +396,12 @@ public class BatteryChargerBlockEntity extends AbstractPackagerBlockEntity<Energ
         if (targetInv == null || !targetInv.canReceive())
             return false;
 
-        if (simulate)
-            return targetInv.receiveEnergy(batteryStorage.getEnergyStored(), true) > 0;
+        int canReceive = targetInv.receiveEnergy(batteryStorage.getEnergyStored(), true);
+        if (canReceive <= 0)
+            return false;
+
+        if(simulate)
+            return true;
 
         isUnwrappingEnergy = true;
 

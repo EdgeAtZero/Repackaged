@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import net.liukrast.repackaged.registry.RepackagedBlockEntityTypes;
 import net.liukrast.repackaged.registry.RepackagedBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import org.jetbrains.annotations.Nullable;
@@ -78,8 +79,13 @@ public class PackagerConnectorBlockEntity extends SmartBlockEntity {
             return;
         }
 
+        var toInsert = itemHandler.extractItem(0, 1, true);
+        if(toInsert.isEmpty()) return;
+
+        ItemStack remainder = container.insertItem(0, toInsert, true);
+        if(ItemStack.matches(remainder, toInsert)) return;
+
         var stack = itemHandler.extractItem(0, 1, false);
-        if(stack.isEmpty()) return;
         container.insertItem(0, stack, false);
     }
 }
