@@ -138,7 +138,14 @@ dependencies {
 
     implementation "curse.maven:createaddition-439890:7518252"
     implementation "curse.maven:immersive-engineering-231951:6733669"
+    implementation "curse.maven:mekanism-268560:7904058"
 
+    implementation "curse.maven:architectury-api-419699:5786327"
+    implementation "curse.maven:guideme-1173950:7127444"
+    implementation "curse.maven:create-stock-bridge-1256341:8044769"
+    implementation "curse.maven:applied-flux-965012:7429565"
+    implementation "curse.maven:applied-energistics-2-223794:7027323"
+    implementation "curse.maven:glodium-957920:5821676"
 
 }
 
