@@ -233,6 +233,10 @@ public class FluidStockInventoryType extends StockInventoryType<Fluid, FluidStac
         }
     };
 
+    public FluidStockInventoryType() {
+        defaultUnpackProcedure = DefaultFluidUnpackProcedure.INSTANCE;
+    }
+
     @Override
     public @NotNull IValueHandler<Fluid, FluidStack, IFluidHandler> valueHandler() {
         return VALUE_HANDLER;
