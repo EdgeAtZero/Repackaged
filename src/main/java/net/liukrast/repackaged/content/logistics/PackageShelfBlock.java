@@ -1,5 +1,6 @@
 package net.liukrast.repackaged.content.logistics;
 
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.deployer.DeployerFakePlayer;
 import com.simibubi.create.content.logistics.packager.PackagerBlock;
 import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
@@ -157,6 +158,7 @@ public class PackageShelfBlock extends PackagerBlock {
                     world.setBlock(pos, state.setValue(TYPE, Type.TOP), 3);
                     world.setBlock(pos.above(), state.setValue(TYPE, Type.BOTTOM), 3);
                 }
+                IWrenchable.playRotateSound(world, pos);
                 if(world.isClientSide())
                     return InteractionResult.SUCCESS;
                 if (!player.isCreative()) {
@@ -182,6 +184,7 @@ public class PackageShelfBlock extends PackagerBlock {
                     }
                 }
 
+                IWrenchable.playRotateSound(world, pos);
                 if(y < 0.5) {
                     if(state.getValue(TYPE) == Type.BOTTOM) {
                         world.setBlock(pos, state.setValue(TYPE, Type.MIDDLE), 3);
@@ -206,6 +209,8 @@ public class PackageShelfBlock extends PackagerBlock {
         Direction currentFacing = state.getValue(FACING);
 
         if (clickedFace == Direction.DOWN) {
+            if(currentFacing.getAxis().isVertical())
+                return InteractionResult.SUCCESS;
             world.setBlock(pos, state.setValue(FACING, currentFacing.getClockWise()),3);
             return InteractionResult.SUCCESS;
         }
@@ -217,6 +222,8 @@ public class PackageShelfBlock extends PackagerBlock {
         else if (currentFacing == clickedFace.getCounterClockWise())
             world.setBlock(pos, state.setValue(FACING, clickedFace.getClockWise()), 3);
         else return InteractionResult.PASS;
+
+        IWrenchable.playRotateSound(world, pos);
 
         return InteractionResult.SUCCESS;
     }
