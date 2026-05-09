@@ -33,13 +33,13 @@ public class RepackagedLanguageProvider extends DeployerLanguageProviderImpl {
 
         addReplaced("item.%s.battery.brass", "Brass Battery");
         addReplaced("item.%s.bottle.copper", "Copper Bottle");
-        addReplaced("item.%s.rare_bottle.rare_exposed_copper", "Rare Exposed Copper Bottle");
-        addReplaced("item.%s.rare_bottle.rare_large_exposed_copper", "Rare Exposed Large Copper Bottle");
-        addReplaced("item.%s.rare_bottle.rare_weathered_copper", "Rare Weathered Copper Bottle");
-        addReplaced("item.%s.rare_bottle.rare_large_weathered_copper", "Rare Weathered Large Copper Bottle");
-        addReplaced("item.%s.rare_bottle.rare_oxidized_copper", "Rare Oxidized Copper Bottle");
-        addReplaced("item.%s.rare_bottle.rare_large_oxidized_copper", "Rare Oxidized Large Copper Bottle");
-        addReplaced("item.%s.rare_bottle.rare_golden", "Rare Golden Bottle");
+        addReplaced("item.%s.rare_bottle.exposed_copper", "Rare Exposed Copper Bottle");
+        addReplaced("item.%s.rare_bottle.large_exposed_copper", "Rare Exposed Large Copper Bottle");
+        addReplaced("item.%s.rare_bottle.weathered_copper", "Rare Weathered Copper Bottle");
+        addReplaced("item.%s.rare_bottle.large_weathered_copper", "Rare Weathered Large Copper Bottle");
+        addReplaced("item.%s.rare_bottle.oxidized_copper", "Rare Oxidized Copper Bottle");
+        addReplaced("item.%s.rare_bottle.large_oxidized_copper", "Rare Oxidized Large Copper Bottle");
+        addReplaced("item.%s.rare_bottle.golden", "Rare Golden Bottle");
 
         addReplaced("stock_inventory_type.%s.energy.action_add", "Scroll or click to add");
         addReplaced("stock_inventory_type.%s.energy.action_remove", "Scroll or click to remove");
