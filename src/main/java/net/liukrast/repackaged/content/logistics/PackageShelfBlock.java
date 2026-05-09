@@ -1,11 +1,14 @@
 package net.liukrast.repackaged.content.logistics;
 
+import com.simibubi.create.content.kinetics.deployer.DeployerFakePlayer;
 import com.simibubi.create.content.logistics.packager.PackagerBlock;
 import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
+import net.liukrast.repackaged.Repackaged;
 import net.liukrast.repackaged.registry.RepackagedBlockEntityTypes;
 import net.liukrast.repackaged.registry.RepackagedBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -141,8 +144,12 @@ public class PackageShelfBlock extends PackagerBlock {
         var pos = context.getClickedPos();
         var y = context.getClickLocation().y - pos.getY();
         var state1 = world.getBlockState(y < 0.5 ? pos.below() : pos.above());
+        var player = context.getPlayer();
+        if(player == null)
+            return InteractionResult.PASS;
         if(state1.is(this)) {
             if(state.getValue(TYPE) == Type.MIDDLE && state1.getValue(TYPE) == Type.MIDDLE) {
+                //Split
                 if(y < 0.5) {
                     world.setBlock(pos, state.setValue(TYPE, Type.BOTTOM), 3);
                     world.setBlock(pos.below(), state.setValue(TYPE, Type.TOP), 3);
@@ -150,8 +157,31 @@ public class PackageShelfBlock extends PackagerBlock {
                     world.setBlock(pos, state.setValue(TYPE, Type.TOP), 3);
                     world.setBlock(pos.above(), state.setValue(TYPE, Type.BOTTOM), 3);
                 }
+                if(world.isClientSide())
+                    return InteractionResult.SUCCESS;
+                if (!player.isCreative()) {
+                    Block.getDrops(state, (ServerLevel) world, pos, world.getBlockEntity(pos), player, context.getItemInHand())
+                            .forEach(itemStack -> player.getInventory()
+                                    .placeItemBackInInventory(itemStack));
+                }
                 return InteractionResult.SUCCESS;
             } else {
+                //Connect
+                if(!player.isCreative() && !player.getInventory().contains(RepackagedBlocks.PACKAGE_SHELF.toStack())) {
+                    return InteractionResult.FAIL;
+                } else {
+                    ItemStack required = RepackagedBlocks.PACKAGE_SHELF.toStack();
+                    int toConsume = required.getCount();
+                    for(int i = 0; i < player.getInventory().getContainerSize() && toConsume > 0; i++) {
+                        ItemStack slot = player.getInventory().getItem(i);
+                        if(ItemStack.isSameItemSameComponents(slot, required)) {
+                            int take = Math.min(toConsume, slot.getCount());
+                            slot.shrink(take);
+                            toConsume -= take;
+                        }
+                    }
+                }
+
                 if(y < 0.5) {
                     if(state.getValue(TYPE) == Type.BOTTOM) {
                         world.setBlock(pos, state.setValue(TYPE, Type.MIDDLE), 3);
