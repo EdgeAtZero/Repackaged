@@ -11,6 +11,7 @@ import dev.engine_room.flywheel.lib.instance.InstanceTypes;
 import dev.engine_room.flywheel.lib.instance.TransformedInstance;
 import net.liukrast.deployer.lib.helper.VisualHelpers;
 import net.liukrast.deployer.lib.helper.client.PackageVisualExtension;
+import net.liukrast.repackaged.RepackagedConfig;
 import net.liukrast.repackaged.registry.RepackagedDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -50,7 +51,7 @@ public class BottleVisual implements PackageVisualExtension.Entity {
     @Override
     public void beginFrame(DynamicVisual.Context context, PackageEntity packageEntity) {
         var fs = getFluidStack(packageEntity.box);
-        float progress = height/16f * fs.getAmount()/1000f;
+        float progress = height/16f * fs.getAmount()/ (float)RepackagedConfig.Server.BOTTLE_CAPACITY.getAsInt();
         float scaleFactor = -0.01f;
 
         stream.vScale = -(texture.getV1() - texture.getV0());

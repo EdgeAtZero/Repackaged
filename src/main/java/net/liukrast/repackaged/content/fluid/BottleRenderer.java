@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRendere
 import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.liukrast.deployer.lib.logistics.packager.GenericPackageItem;
+import net.liukrast.repackaged.RepackagedConfig;
 import net.liukrast.repackaged.registry.RepackagedDataComponents;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -26,7 +27,7 @@ public class BottleRenderer extends CustomRenderedItemModelRenderer {
         FluidStack fs = stack.getOrDefault(RepackagedDataComponents.BOTTLE_CONTENTS, SimpleFluidContent.EMPTY).copy();
         if(fs.isEmpty()) return;
         float w = gpi.style.width()/16f;
-        float h = gpi.style.height()/16f * fs.getAmount()/1000;
+        float h = gpi.style.height()/16f * fs.getAmount()/ (float)RepackagedConfig.Server.BOTTLE_CAPACITY.getAsInt();
 
         float x = -gpi.style.width()/32f;
         float y = -1/2f;

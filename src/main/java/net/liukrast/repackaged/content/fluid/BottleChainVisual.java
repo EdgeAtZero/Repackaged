@@ -12,6 +12,7 @@ import dev.engine_room.flywheel.lib.instance.TransformedInstance;
 import dev.engine_room.flywheel.lib.visual.util.SmartRecycler;
 import net.liukrast.deployer.lib.helper.VisualHelpers;
 import net.liukrast.deployer.lib.helper.client.PackageVisualExtension;
+import net.liukrast.repackaged.RepackagedConfig;
 import net.liukrast.repackaged.registry.RepackagedDataComponents;
 import net.liukrast.repackaged.registry.RepackagedItems;
 import net.minecraft.client.Minecraft;
@@ -68,7 +69,7 @@ public class BottleChainVisual implements PackageVisualExtension.ChainConveyor {
         stream.vScale = -(texture.getV1() - texture.getV0());
         stream.v0 = texture.getV0() + (texture.getV1() - texture.getV0());
 
-        stream.progress = packageItem.style.height()/16f * fs.getAmount()/1000f;
+        stream.progress = packageItem.style.height()/16f * ((float)fs.getAmount())/RepackagedConfig.Server.BOTTLE_CAPACITY.getAsInt();
         stream.colorArgb(clientFluid.getTintColor(fs));
         buffers[0] = stream;
 
