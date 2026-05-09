@@ -6,7 +6,6 @@ import it.unimi.dsi.fastutil.Hash;
 import net.liukrast.deployer.lib.logistics.GenericPackageOrderData;
 import net.liukrast.deployer.lib.logistics.packager.AbstractInventorySummary;
 import net.liukrast.deployer.lib.logistics.packager.AbstractPackagerBlockEntity;
-import net.liukrast.deployer.lib.logistics.packager.GenericPackageItem;
 import net.liukrast.deployer.lib.logistics.packager.StockInventoryType;
 import net.liukrast.deployer.lib.logistics.packagerLink.GenericRequestPromise;
 import net.liukrast.deployer.lib.logistics.stockTicker.GenericOrderContained;
@@ -222,7 +221,7 @@ public class EnergyStockInventoryType extends StockInventoryType<Energy, EnergyS
 
         @Override
         public ItemStack getRandomBox() {
-            List<DeferredItem<GenericPackageItem>> pool = !RepackagedItems.RARE_BATTERIES.isEmpty() && STYLE_PICKER.nextInt(RARE_CHANCE) == 0 ? RepackagedItems.RARE_BATTERIES : RepackagedItems.STANDARD_BATTERIES;
+            List<DeferredItem<EnergyBox>> pool = !RepackagedItems.RARE_BATTERIES.isEmpty() && STYLE_PICKER.nextInt(RARE_CHANCE) == 0 ? RepackagedItems.RARE_BATTERIES : RepackagedItems.STANDARD_BATTERIES;
             return new ItemStack(pool.get(STYLE_PICKER.nextInt(pool.size())).get());
         }
 

@@ -32,6 +32,10 @@ public class RepackagedConfig {
                 .comment("REQUIRES RESTART!")
                 .defineInRange("maxBatteryEnergy", 500_000, 1, Integer.MAX_VALUE);
 
+        public static final ModConfigSpec.IntValue BATTERY_LIGHTNING_SPAWN = BUILDER
+                .comment("Defines at what amount of energy a battery will spawn a lightning when opened directly by a player")
+                .defineInRange("batteryLightningSpawn", 100_000, 1, Integer.MAX_VALUE);
+
         static final ModConfigSpec SPEC = BUILDER.build();
     }
 }

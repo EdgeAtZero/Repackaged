@@ -6,10 +6,10 @@ import it.unimi.dsi.fastutil.Hash;
 import net.liukrast.deployer.lib.logistics.GenericPackageOrderData;
 import net.liukrast.deployer.lib.logistics.packager.AbstractInventorySummary;
 import net.liukrast.deployer.lib.logistics.packager.AbstractPackagerBlockEntity;
-import net.liukrast.deployer.lib.logistics.packager.GenericPackageItem;
 import net.liukrast.deployer.lib.logistics.packager.StockInventoryType;
 import net.liukrast.deployer.lib.logistics.packagerLink.GenericRequestPromise;
 import net.liukrast.deployer.lib.logistics.stockTicker.GenericOrderContained;
+import net.liukrast.repackaged.content.UnwrappablePackageItem;
 import net.liukrast.repackaged.registry.RepackagedDataComponents;
 import net.liukrast.repackaged.registry.RepackagedItems;
 import net.minecraft.ChatFormatting;
@@ -185,7 +185,7 @@ public class FluidStockInventoryType extends StockInventoryType<Fluid, FluidStac
 
         @Override
         public ItemStack getRandomBox() {
-            List<DeferredItem<GenericPackageItem>> pool = !RepackagedItems.RARE_BOTTLES.isEmpty() && STYLE_PICKER.nextInt(RARE_CHANCE) == 0 ? RepackagedItems.RARE_BOTTLES : RepackagedItems.STANDARD_BOTTLES;
+            List<DeferredItem<UnwrappablePackageItem>> pool = !RepackagedItems.RARE_BOTTLES.isEmpty() && STYLE_PICKER.nextInt(RARE_CHANCE) == 0 ? RepackagedItems.RARE_BOTTLES : RepackagedItems.STANDARD_BOTTLES;
             return new ItemStack(pool.get(STYLE_PICKER.nextInt(pool.size())).get());
         }
 
