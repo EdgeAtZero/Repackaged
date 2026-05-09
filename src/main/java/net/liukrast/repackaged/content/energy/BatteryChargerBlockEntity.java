@@ -205,6 +205,10 @@ public class BatteryChargerBlockEntity extends AbstractPackagerBlockEntity<Energ
             return;
         ItemStack created = getStockType().packageHandler().getRandomBox();
 
+        var battery = created.getCapability(Capabilities.EnergyStorage.ITEM);
+        if(battery == null || targetInv.extractEnergy(battery.getMaxEnergyStored(), true) == 0)
+            return;
+
         if(!signBasedAddress.isBlank()) {
             PackageItem.clearAddress(created);
             PackageItem.addAddress(created, signBasedAddress);
