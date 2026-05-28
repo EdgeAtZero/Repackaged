@@ -10,6 +10,7 @@
 	"CrafterUnpackingHandlerMixin",
 	"DefaultUnpackingHandlerMixin",
 	"PackageEntityMixin",
+	"PackagerBlockEntityMixin",
 	"PackagerBlockMixin"
   ],
   "client": [
